@@ -1,0 +1,29 @@
+[
+    {
+        "id" : 1,
+        "username" : "vaneet",
+        "mobile": "8894228095",
+        "email": "vaneet1262@gmail.com",
+        "password": "99999999",
+        "otp": "123456",
+        "status": "active"
+    },
+      {
+        "id" : 2,
+        "username" : "bhola",
+        "mobile": "9816606535",
+        "email": "test@gmail.com",
+        "password": "12345678",
+        "otp": "123453",
+        "status": "active"
+    },
+    {
+        "id" : 3,
+        "username" : "sangam",
+        "mobile": "9817581632",
+        "email": "test@gmail.com",
+        "password": "34567890",
+        "otp": "123453",
+        "status": "active"
+    }
+]
