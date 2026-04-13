@@ -1,7 +1,5 @@
 
 import './App.css'
-import Portal from './Pages/Portal'
-import Verifyotp from './Pages/Verifyotp'
 import Instagram from './Pages/Instagram'
 import Reels from './Pages/Reels'
 import Messages from './Pages/Messages'
@@ -11,8 +9,12 @@ import Notification from './Pages/Notification'
 import Profile from './Pages/Profile'
 import Profile1 from './Pages/Profile1'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import AuthLayout from './Layout/AuthLayout'
-import AppLayout from './Layout/AppLayout'
+import AuthLayout from './layouts/AuthLayout'
+import AppLayout from './layouts/AppLayout'
+import Login from './pages/auth/login'
+import Register from './pages/auth/register'
+import Forgot from './pages/auth/forgot'
+import Verifyotp from './pages/auth/Verifyotp'
 
 function App() {
   
@@ -25,9 +27,11 @@ function App() {
         
 
         <Route path='/' element={<AuthLayout/>}>
-           <Route path = '/' element ={<Portal/>}/>
+           <Route path = '/' element ={<Login/>}/>
+           <Route path = '/auth/register' element ={<Register/>}/>
+           <Route path = '/auth/forgot' element ={<Forgot/>}/>
            
-           <Route path = '/verify' element = {<Verifyotp/>}/>
+           <Route path = '/auth/verify' element = {<Verifyotp/>}/>
           
       </Route>
         

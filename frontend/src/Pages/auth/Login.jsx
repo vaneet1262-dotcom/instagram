@@ -1,51 +1,53 @@
 import { useState } from "react";
-import Users from "../data/users.json";
+import { Link } from "react-router-dom";
+import axios from 'axios'
 
-const Portal = () => {
+const Login = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
+
+   const [loading, setLoading] = useState(false);
    
 
-   const handleLogin = (e) => {
-      e.preventDefault();
-
-
-      if (!username) {
-         alert("Please fill username");
-         return;
-      }
-
-      if (!password) {
-         alert("Please fill password");
-         return;
-      }
-
-      if (password.length < 8) {
-         alert("Password must be at least 8 characters");
-         return;
-      }
-
-      
-
-
-      const user = Users.find(
-         (data) =>
-            data.username === username && data.password === password 
-      );
-
+   const handleLogin = async(e) => {
+        e.preventDefault();
+          setLoading(true)
+    
+        
+    
+          if (!username) {
+             alert("Please fill username");
+             return;
+          }
+    
+          if (!password) {
+             alert("Please fill password");
+             return;
+          }
+    
+          if (password.length < 8) {
+             alert("Password must be at least 8 characters");
+             return;
+          }
+    
+    try {
+          const res = await axios.post("http://127.0.0.1:5000/auth/login",{
+            name,email:username,password
+           })
+    
+           console.log(res.data.message);
+            setLoading(false)
+           alert(res.data.message)
+        
+    } catch (error) {
+         console.log(error.response.data.message)
+          setLoading(false)
+         alert(error.response.data.message);
+    }
     
 
-if (user) {
 
-   console.log("User OTP:", user.otp);
-
-   alert("Your OTP is: " + user.otp);
-
-   window.location.href = "verify";
-} else {
-   alert("Invalid username or password ");
-}
-}
+    }
 
 
    return (
@@ -71,8 +73,8 @@ if (user) {
                         />
 
                         <div>
-                           <button type="submit" className="w-100 bt">
-                              Log in
+                           <button type="submit" disabled={loading} className="w-100 bt">
+                              {loading? "Logining" : "Log in"}
                            </button>
                            <button type="button" className="w-100 bt1">
                               Forgot Password?
@@ -83,9 +85,9 @@ if (user) {
                            <button type="button" className="w-100 bt2">
                               Log in with Facebook
                            </button>
-                           <button type="button" className="w-100 bt3">
+                           <Link to={"/auth/register"}  className="btn btn-primary w-100 p-2">
                               Create New Account
-                           </button>
+                           </Link>
                         </div>
                      </form>
                   </div>
@@ -93,4 +95,4 @@ if (user) {
    );
 };
 
-export default Portal;
+export default Login;
