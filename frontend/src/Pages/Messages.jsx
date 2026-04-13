@@ -7,7 +7,7 @@ const Messages =()=>{
 
             <div className="col-4">
                 <div className="top-bar">
-                <h4>Vaneet_Kumar_19</h4>
+                <h4>Vaneet_Kumar</h4>
                 </div>
                 <input type="text" className="form-control search inpt" placeholder="Search" />
                  <div className="d-flex yn">
