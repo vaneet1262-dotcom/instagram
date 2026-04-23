@@ -1,28 +1,46 @@
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Forgot = () => {
-   const [username, setUsername] = useState("");
-   const [password, setPassword] = useState("");
+   const [email, setEmail] = useState("");
+
+   const [loading, setLoading] = useState(false);
    
 
-   const handleLogin = (e) => {
+   const handleForgot = async(e) => {
       e.preventDefault();
+      setLoading(true)
 
+   try {
+      
 
-      if (!username) {
-         alert("Please fill username");
-         return;
+      if (!email) {
+         throw new Error("Please fill email");
+      
       }
 
-      if (!password) {
-         alert("Please fill password");
-         return;
-      }
 
-      if (password.length < 8) {
-         alert("Password must be at least 8 characters");
-         return;
-      }
+
+          const res = await axios.post("http://127.0.0.1:5000/auth/forgot",{
+            email
+           })
+           toast.success(res.data.message)
+           
+    
+
+   } catch (error) {
+         console.log(error)
+         toast.error(error?.response?.data?.message || error.message);
+}
+finally {
+   setEmail("")
+   setLoading(false)
+   
+}
+   
+
 
       
 }
@@ -33,39 +51,29 @@ const Forgot = () => {
         <div className="container">
                      <h5 className="hd">Log into Instagram</h5>
 
-                     <form onSubmit={handleLogin}>
+                     <form onSubmit={handleForgot}>
                         <input
                            className="form-control ipt"
                            type="text"
-                           placeholder="Mobile Number, username or email"
-                           value={username}
-                           onChange={(e) => setUsername(e.target.value)}
+                           placeholder="email address"
+                           value={email}
+                           onChange={(e) => setEmail(e.target.value)}
                         />
 
-                        <input
-                           type="password"
-                           placeholder="Password"
-                           className="form-control ipt"
-                           value={password}
-                           onChange={(e) => setPassword(e.target.value)}
-                        />
+                     
 
                         <div>
-                           <button type="submit" className="w-100 bt">
-                              Log in
-                           </button>
-                           <button type="button" className="w-100 bt1">
-                              Forgot Password?
+                         
+                           <button type="submit" disabled={loading} className="btn btn-primary w-100">
+                             {loading ? "Submitting" : "Forgot Password?"} 
                            </button>
                         </div>
 
                         <div>
-                           <button type="button" className="w-100 bt2">
-                              Log in with Facebook
-                           </button>
-                           <button type="button" className="w-100 bt3">
-                              Create New Account
-                           </button>
+                           <Link to={"/"}>
+                              Log in 
+                           </Link>
+                         
                         </div>
                      </form>
                   </div>

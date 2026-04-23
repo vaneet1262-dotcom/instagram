@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import toast from "react-hot-toast";
 
 const Login = () => {
    const [username, setUsername] = useState("");
@@ -15,35 +16,42 @@ const Login = () => {
     
         
     
-          if (!username) {
-             alert("Please fill username");
-             return;
+    try {
+
+
+          if (username =="") {
+            throw new Error("Please fill username");
+         
+           
           }
     
           if (!password) {
-             alert("Please fill password");
-             return;
+              throw new Error("Please fill password");
+            
           }
     
           if (password.length < 8) {
-             alert("Password must be at least 8 characters");
-             return;
+              throw new Error("Password must be at least 8 characters");
+      
           }
     
-    try {
+
           const res = await axios.post("http://127.0.0.1:5000/auth/login",{
             name,email:username,password
            })
     
-           console.log(res.data.message);
-            setLoading(false)
-           alert(res.data.message)
+           toast.success(res.data.message)
         
     } catch (error) {
-         console.log(error.response.data.message)
-          setLoading(false)
-         alert(error.response.data.message);
-    }
+         console.log(error)
+         toast.error(error?.response?.data?.message || error.message);
+}
+finally {
+   setUsername("")
+   setPassword("")
+   setLoading(false)
+}
+
     
 
 
@@ -76,9 +84,9 @@ const Login = () => {
                            <button type="submit" disabled={loading} className="w-100 bt">
                               {loading? "Logining" : "Log in"}
                            </button>
-                           <button type="button" className="w-100 bt1">
+                           <Link  className="w-100 bt1" to={"/auth/forgot"}>
                               Forgot Password?
-                           </button>
+                           </Link>
                         </div>
 
                         <div>

@@ -44,7 +44,25 @@ res.status(200).json({"status": true, message : "user login success", token});
 }
 
 
+
+const forgot = async (req,res) => {
+  const {email} = req.body;
+
+  const exist = await userModel.findOne({email})
+
+  if(!exist){
+    return res.status(404).json({"status": false, message : "user not found"});
+  }
+
+  const token = jwt.sign(exist.toObject(),"secretkey")
+
+
+res.status(200).json({"status": true, message : "Pls check your email reset password link sent!"});
+}
+
+
 module.exports = {
     register,
-    login
+    login,
+    forgot
 }

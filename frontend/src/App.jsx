@@ -16,6 +16,8 @@ import Register from './pages/auth/register'
 import Forgot from './pages/auth/forgot'
 import Verifyotp from './pages/auth/Verifyotp'
 
+import {Toaster} from 'react-hot-toast'
+
 function App() {
   
 
@@ -52,6 +54,11 @@ function App() {
       </Routes>
       
       </BrowserRouter>
+
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     </>
   )
 }

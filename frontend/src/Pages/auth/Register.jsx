@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from 'axios'
 import { Link } from "react-router-dom";
 
+import toast from "react-hot-toast";
+
 const Register = () => {
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
@@ -13,39 +15,46 @@ const Register = () => {
       e.preventDefault();
       setLoading(true)
 
-        if (!name) {
-         alert("Please fill name");
-         return;
+       
+
+try {
+
+    if (!name) {
+         throw new Error("Please fill name");
+      
       }
 
       if (!email) {
-         alert("Please fill email");
-         return;
+         throw new Error("Please fill email");
+         
       }
 
       if (!password) {
-         alert("Please fill password");
-         return;
+         throw new Error("Please fill password");
+       
       }
 
       if (password.length < 8) {
-         alert("Password must be at least 8 characters");
-         return;
+         throw new Error("Password must be at least 8 characters");
+      
       }
-
-try {
       const res = await axios.post("http://127.0.0.1:5000/auth/register",{
         name,email,password
        })
 
-       console.log(res.data.message);
-        setLoading(false)
-       alert(res.data.message)
+
+       toast.success(res.data.message)
     
 } catch (error) {
-     console.log(error.response.data.message)
-      setLoading(false)
-     alert(error.response.data.message);
+     console.log(error)
+    
+     toast.error(error?.response?.data?.message || error.message);
+}
+finally {
+   setName("")
+   setEmail("")
+   setPassword("")
+   setLoading(false)
 }
 
      
