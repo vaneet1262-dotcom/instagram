@@ -17,6 +17,7 @@ import Forgot from './pages/auth/forgot'
 import Verifyotp from './pages/auth/Verifyotp'
 
 import {Toaster} from 'react-hot-toast'
+import Reset from './Pages/auth/Reset'
 
 function App() {
   
@@ -30,8 +31,10 @@ function App() {
 
         <Route path='/' element={<AuthLayout/>}>
            <Route path = '/' element ={<Login/>}/>
+           <Route path = '/login' element ={<Login/>}/>
            <Route path = '/auth/register' element ={<Register/>}/>
            <Route path = '/auth/forgot' element ={<Forgot/>}/>
+                      <Route path = '/auth/reset/:token' element ={<Reset/>}/>
            
            <Route path = '/auth/verify' element = {<Verifyotp/>}/>
           
