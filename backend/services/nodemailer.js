@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 // Create a transporter using SMTP
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
+  host: "sandbox.smtp.mailtrap.io",
   port: 587,
   secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
   auth: {
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 const SendMail = async(tomail,subject,message) => {
     try {
   const info = await transporter.sendMail({
-    from: '"Account" <vaneet1262@gmail.com>', // sender address
+    from: '"Account" <vaneet1262@gmail.com', // sender address
     to: tomail, // list of recipients
     subject, // subject line
     html:message, // HTML body

@@ -101,7 +101,7 @@ finally {
 
                         <div>
                           
-                           <Link type="button" to={"/"} className="w-100 bt3">
+                           <Link type="button" to={"/"} className="w-100 btn btn-primary p-2 mt-3">
                               Login Account
                            </Link>
                         </div>

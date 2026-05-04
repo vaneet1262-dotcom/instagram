@@ -84,7 +84,7 @@ finally {
                            <button type="submit" disabled={loading} className="w-100 bt">
                               {loading? "Logining" : "Log in"}
                            </button>
-                           <Link  className="w-100 bt1" to={"/auth/forgot"}>
+                           <Link  className="w-100 btn btn-success p-2 mt-3 mb-3" to={"/auth/forgot"}>
                               Forgot Password?
                            </Link>
                         </div>

@@ -70,7 +70,7 @@ finally {
                         </div>
 
                         <div>
-                           <Link to={"/"}>
+                           <Link to={"/"} className="btn btn-primary p-2 w-100 mt-3">
                               Log in 
                            </Link>
                          
